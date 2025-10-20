@@ -44,6 +44,7 @@ runs:
     -
       name: Run tailor-log
       run: |
+        tailor-log -v
         tailor-log ingest --workspace-id ${{inputs.workspace-id}} \
         --datadog-service ${{inputs.datadog-service}} \
         --datadog-tag ${{inputs.datadog-tags}} \
