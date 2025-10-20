@@ -2,6 +2,7 @@ package datadog
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"log/slog"
@@ -16,7 +17,11 @@ import (
 	"github.com/k1LoW/tailor-log/item"
 )
 
-const maxLogsPerRequest = 50
+const (
+	maxLogsPerRequest = 1000
+	maxPayloadSize    = 5 * 1024 * 1024 // 5MB
+	capSize           = 256 * 1024      // 256KB
+)
 
 type Client struct {
 	logApi *datadogV2.LogsApi
@@ -60,7 +65,11 @@ func (c *Client) SendLogs(ctx context.Context, in <-chan *item.Item) error {
 			Service:              datadog.PtrString(c.cfg.Outputs.Datadog.Service),
 			AdditionalProperties: properties,
 		})
-		if len(buf) >= maxLogsPerRequest {
+		b, err := json.Marshal(buf)
+		if err != nil {
+			return fmt.Errorf("failed to marshal log item: %w", err)
+		}
+		if len(buf) >= maxLogsPerRequest || len(b)+capSize >= maxPayloadSize {
 			slog.Info("Submitting logs to Datadog", "count", len(buf))
 			_, _, err := c.logApi.SubmitLog(ctx, buf, *datadogV2.NewSubmitLogOptionalParameters().WithContentEncoding(datadogV2.CONTENTENCODING_GZIP))
 			if err != nil {
