@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.3.0](https://github.com/k1LoW/tailor-log/compare/v0.2.7...v0.3.0) - 2025-10-20
+### Fix bug 🐛
+- fix: use github-script by @k1LoW in https://github.com/k1LoW/tailor-log/pull/20
+
 ## [v0.2.7](https://github.com/k1LoW/tailor-log/compare/v0.2.6...v0.2.7) - 2025-10-20
 ### Fix bug 🐛
 - fix: handle large log submissions and improve buffer management by @k1LoW in https://github.com/k1LoW/tailor-log/pull/19
