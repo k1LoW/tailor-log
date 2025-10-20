@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.2.7](https://github.com/k1LoW/tailor-log/compare/v0.2.6...v0.2.7) - 2025-10-20
+### Fix bug 🐛
+- fix: handle large log submissions and improve buffer management by @k1LoW in https://github.com/k1LoW/tailor-log/pull/19
+### Other Changes
+- fix: remove concurrency limit by @k1LoW in https://github.com/k1LoW/tailor-log/pull/17
+
 ## [v0.2.6](https://github.com/k1LoW/tailor-log/compare/v0.2.5...v0.2.6) - 2025-10-20
 ### Fix bug 🐛
 - fix: improve error handling and log processing by @k1LoW in https://github.com/k1LoW/tailor-log/pull/15
