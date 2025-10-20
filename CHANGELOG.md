@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.2.1](https://github.com/k1LoW/tailor-log/compare/v0.2.0...v0.2.1) - 2025-10-20
+### Fix bug 🐛
+- fix: fix action by @k1LoW in https://github.com/k1LoW/tailor-log/pull/5
+
 ## [v0.2.0](https://github.com/k1LoW/tailor-log/compare/v0.1.0...v0.2.0) - 2025-10-20
 ### New Features 🎉
 - feat: GitHub Action by @k1LoW in https://github.com/k1LoW/tailor-log/pull/3
