@@ -59,20 +59,17 @@ var ingestCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
+		var sendErr error
 		out := make(chan *item.Item)
 		defer func() {
 			cancel()
-		L:
-			for {
-				select {
-				case <-out:
-				default:
-					break L
-				}
-			}
 			close(out)
 			if errr := donegroup.WaitWithTimeout(ctx, waitTimeout); errr != nil {
 				err = errors.Join(err, errr)
+			}
+			if sendErr != nil {
+				slog.Error("Skip saving position due to send error", "error", sendErr)
+				return
 			}
 			if errr := p.DumpTo(cmd.Context(), posType); errr != nil {
 				err = errors.Join(err, errr)
@@ -114,7 +111,10 @@ var ingestCmd = &cobra.Command{
 			err := dd.SendLogs(ctx, out)
 			if err != nil {
 				cancel()
-				slog.Info("Datadog log sender stopped", "error", err)
+				sendErr = err
+				for it := range out {
+					slog.Error("Failed to send item to Datadog", "item", it)
+				}
 			}
 			return err
 		})

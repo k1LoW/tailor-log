@@ -80,12 +80,6 @@ func (c *Client) fetchPipelineResolverLogs(ctx context.Context, namespaceName, n
 	}()
 	token := ""
 	for {
-		select {
-		case <-ctx.Done():
-			return ctx.Err()
-		default:
-		}
-
 		results, err := c.client.ListPipelineResolverExecutionResults(ctx, connect.NewRequest(&tailorv1.ListPipelineResolverExecutionResultsRequest{
 			WorkspaceId:   c.cfg.WorkspaceID,
 			NamespaceName: namespaceName,
@@ -110,9 +104,6 @@ func (c *Client) fetchPipelineResolverLogs(ctx context.Context, namespaceName, n
 		}
 		slog.Info("Fetched pipeline resolver execution results", "namespace", namespaceName, "name", name, "count", len(results.Msg.GetResults()))
 		for _, result := range results.Msg.GetResults() {
-			if latest.Before(result.FinishedAt.AsTime()) {
-				latest = result.FinishedAt.AsTime()
-			}
 			source := SourcePipelineResolver
 			var level item.Level
 			switch result.Status {
@@ -149,6 +140,10 @@ func (c *Client) fetchPipelineResolverLogs(ctx context.Context, namespaceName, n
 				Level:   level,
 				Message: message,
 				Attrs:   attrs,
+			}
+
+			if latest.Before(result.FinishedAt.AsTime()) {
+				latest = result.FinishedAt.AsTime()
 			}
 		}
 		nextToken := results.Msg.GetNextPageToken()
