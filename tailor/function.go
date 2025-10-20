@@ -31,12 +31,6 @@ func (c *Client) FetchFunctionLogs(ctx context.Context, pos *pos.Pos, out chan<-
 	}()
 	token := ""
 	for {
-		select {
-		case <-ctx.Done():
-			return ctx.Err()
-		default:
-		}
-
 		executions, err := c.client.ListFunctionExecutions(ctx, connect.NewRequest(&tailorv1.ListFunctionExecutionsRequest{
 			WorkspaceId:   c.cfg.WorkspaceID,
 			PageSize:      maxPageSize,
@@ -58,9 +52,6 @@ func (c *Client) FetchFunctionLogs(ctx context.Context, pos *pos.Pos, out chan<-
 		}
 		slog.Info("Fetched function executions", "count", len(executions.Msg.GetExecutions()))
 		for _, exec := range executions.Msg.GetExecutions() {
-			if latest.Before(exec.FinishedAt.AsTime()) {
-				latest = exec.FinishedAt.AsTime()
-			}
 			source := SourceFuncitonUnspecified
 			switch exec.Type {
 			case tailorv1.FunctionExecution_TYPE_STANDARD:
@@ -93,6 +84,9 @@ func (c *Client) FetchFunctionLogs(ctx context.Context, pos *pos.Pos, out chan<-
 				Level:   level,
 				Message: exec.Result,
 				Attrs:   attrs,
+			}
+			if latest.Before(exec.FinishedAt.AsTime()) {
+				latest = exec.FinishedAt.AsTime()
 			}
 		}
 		nextToken := executions.Msg.GetNextPageToken()
