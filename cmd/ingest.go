@@ -103,7 +103,9 @@ var ingestCmd = &cobra.Command{
 			return err
 		}
 		donegroup.Go(ctx, func() error {
-			return dd.SendLogs(ctx, out)
+			err := dd.SendLogs(ctx, out)
+			slog.Info("Datadog log sender stopped", "error", err)
+			return err
 		})
 		eg, ctx := errgroup.WithContext(ctx)
 		eg.Go(func() error {
