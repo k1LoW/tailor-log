@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.2.5](https://github.com/k1LoW/tailor-log/compare/v0.2.4...v0.2.5) - 2025-10-20
+### Fix bug 🐛
+- fix: handle context cancellation and improve channel management by @k1LoW in https://github.com/k1LoW/tailor-log/pull/12
+
 ## [v0.2.4](https://github.com/k1LoW/tailor-log/compare/v0.2.3...v0.2.4) - 2025-10-20
 
 ## [v0.2.3](https://github.com/k1LoW/tailor-log/compare/v0.2.2...v0.2.3) - 2025-10-20
