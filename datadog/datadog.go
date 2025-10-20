@@ -66,7 +66,7 @@ func (c *Client) SendLogs(ctx context.Context, in <-chan *item.Item) error {
 			if err != nil {
 				return fmt.Errorf("failed to submit logs to Datadog: %w", err)
 			}
-			buf = buf[:0] // reset
+			buf = make([]datadogV2.HTTPLogItem, 0, maxLogsPerRequest) // reset
 		}
 	}
 	if len(buf) > 0 {
