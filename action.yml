@@ -48,6 +48,7 @@ runs:
         --datadog-service ${inputs.datadog-service} \
         --datadog-tag ${inputs.datadog-tags} \
         --pos artifact
+      shell: bash
       env:
         TAILOR_TOKEN: ${{ inputs.tailor-token }}
         GITHUB_TOKEN: ${{ inputs.github-token }}
