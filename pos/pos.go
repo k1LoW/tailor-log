@@ -21,17 +21,19 @@ const (
 	posTypeFile      = "file"
 	posTypeArtificat = "artifact"
 
-	posFileName    = "tailor-log.pos.json"
-	posArtifactKey = "tailor-log-pos"
+	posFilePrefix        = "tailor-log.pos"
+	posArtifactKeyPrefix = "tailor-log-pos"
 )
 
 type Pos struct {
 	m           sync.Map
+	workspaceID string
 	defaultTime time.Time
 }
 
-func New() *Pos {
+func New(workspaceID string) *Pos {
 	return &Pos{
+		workspaceID: workspaceID,
 		defaultTime: time.Now().Add(defaultTimeBefore),
 	}
 }
@@ -51,20 +53,22 @@ func (p *Pos) Load(key string) time.Time {
 	return p.defaultTime
 }
 
-func RestoreFrom(ctx context.Context, posType string) (*Pos, error) {
+func RestoreFrom(ctx context.Context, posType, workspaceID string) (*Pos, error) {
+	posFileName := fmt.Sprintf("%s.%s.json", posFilePrefix, workspaceID)
 	switch posType {
 	case posTypeFile:
 		b, err := os.ReadFile(posFileName)
 		if err != nil {
 			if os.IsNotExist(err) {
 				slog.Info("Position file does not exist, starting from default position", "file", posFileName)
-				return New(), nil
+				return New(workspaceID), nil
 			}
 			return nil, err
 		}
 		slog.Info("Restored position from file", "file", posFileName)
-		return Restore(b)
+		return Restore(workspaceID, b)
 	case posTypeArtificat:
+		posArtifactKey := fmt.Sprintf("%s-%s", posArtifactKeyPrefix, workspaceID)
 		ownerrepo := strings.Split(os.Getenv("GITHUB_REPOSITORY"), "/")
 		if len(ownerrepo) != 2 {
 			return nil, fmt.Errorf("invalid GITHUB_REPOSITORY: %s", os.Getenv("GITHUB_REPOSITORY"))
@@ -74,11 +78,11 @@ func RestoreFrom(ctx context.Context, posType string) (*Pos, error) {
 		b, err := fetchLatestArtifact(ctx, owner, repo, posArtifactKey, posFileName)
 		if err != nil {
 			if errors.Is(err, ErrArtifactNotFound) {
-				return New(), nil
+				return New(workspaceID), nil
 			}
 			return nil, err
 		}
-		pos, err := Restore(b)
+		pos, err := Restore(workspaceID, b)
 		if err != nil {
 			return nil, err
 		}
@@ -89,12 +93,12 @@ func RestoreFrom(ctx context.Context, posType string) (*Pos, error) {
 	}
 }
 
-func Restore(b []byte) (*Pos, error) {
+func Restore(workspaceID string, b []byte) (*Pos, error) {
 	m := map[string]time.Time{}
 	if err := json.Unmarshal(b, &m); err != nil {
 		return nil, err
 	}
-	p := New()
+	p := New(workspaceID)
 	for k, v := range m {
 		p.Store(k, v)
 	}
@@ -102,6 +106,7 @@ func Restore(b []byte) (*Pos, error) {
 }
 
 func (p *Pos) DumpTo(ctx context.Context, posType string) error {
+	posFileName := fmt.Sprintf("%s.%s.json", posFilePrefix, p.workspaceID)
 	switch posType {
 	case posTypeFile:
 		b, err := p.Dump()
@@ -111,6 +116,7 @@ func (p *Pos) DumpTo(ctx context.Context, posType string) error {
 		slog.Info("Dumped position to file", "file", posFileName)
 		return os.WriteFile(posFileName, b, 0600)
 	case posTypeArtificat:
+		posArtifactKey := fmt.Sprintf("%s-%s", posArtifactKeyPrefix, p.workspaceID)
 		b, err := p.Dump()
 		if err != nil {
 			return err

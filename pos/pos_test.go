@@ -6,6 +6,7 @@ import (
 )
 
 func TestDumpAndRestore(t *testing.T) {
+	workspaceID := "test_workspace"
 	tests := []struct {
 		name string
 		data map[string]time.Time
@@ -56,7 +57,7 @@ func TestDumpAndRestore(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			// Create a new Pos and populate it with test data
-			original := New()
+			original := New(workspaceID)
 			for k, v := range tt.data {
 				original.Store(k, v)
 			}
@@ -68,7 +69,7 @@ func TestDumpAndRestore(t *testing.T) {
 			}
 
 			// Restore from the dumped data
-			restored, err := Restore(dumped)
+			restored, err := Restore(workspaceID, dumped)
 			if err != nil {
 				t.Fatalf("Failed to restore position: %v", err)
 			}
@@ -92,16 +93,18 @@ func TestDumpAndRestore(t *testing.T) {
 }
 
 func TestRestore_InvalidJSON(t *testing.T) {
+	workspaceID := "test_workspace"
 	invalidJSON := []byte(`{"invalid": "not a time"}`)
-	_, err := Restore(invalidJSON)
+	_, err := Restore(workspaceID, invalidJSON)
 	if err == nil {
 		t.Error("Expected error when restoring invalid JSON, got nil")
 	}
 }
 
 func TestRestore_EmptyBytes(t *testing.T) {
+	workspaceID := "test_workspace"
 	emptyJSON := []byte(`{}`)
-	pos, err := Restore(emptyJSON)
+	pos, err := Restore(workspaceID, emptyJSON)
 	if err != nil {
 		t.Fatalf("Failed to restore empty JSON: %v", err)
 	}
