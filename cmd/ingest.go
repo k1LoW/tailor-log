@@ -22,7 +22,9 @@ THE SOFTWARE.
 package cmd
 
 import (
+	"log/slog"
 	"os/signal"
+	"runtime"
 	"strings"
 	"syscall"
 	"time"
@@ -66,6 +68,22 @@ var ingestCmd = &cobra.Command{
 				err = errors.Join(err, errr)
 			}
 		}()
+		go func() {
+			// Memory usage logging
+			ticker := time.NewTicker(1 * time.Second)
+			defer ticker.Stop()
+			for {
+				select {
+				case <-ticker.C:
+					var m runtime.MemStats
+					runtime.ReadMemStats(&m)
+					slog.Info("Memory usage", slog.Int64("alloc(MB)", int64(m.Alloc)/1024/1024), slog.Int64("total_alloc(MB)", int64(m.TotalAlloc)/1024/1024), slog.Int64("sys(MB)", int64(m.Sys)/1024/1024), slog.Int64("num_gc", int64(m.NumGC)))
+				case <-ctx.Done():
+					return
+				}
+			}
+		}()
+
 		cfg := &config.Config{}
 		cfg.WorkspaceID = workspaceID
 		cfg.Outputs.Datadog.Service = datadogService
