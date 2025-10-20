@@ -15,13 +15,11 @@ import (
 )
 
 const (
-	SourcePipelineResolver      = "tailor_platform.pipeline_resolver"
-	concurrencyPipelineResolver = 10
+	SourcePipelineResolver = "tailor_platform.pipeline_resolver"
 )
 
 func (c *Client) FetchPipelineResolverLogs(ctx context.Context, pos *pos.Pos, out chan<- *item.Item) error {
 	eg, _ := errgroup.WithContext(ctx)
-	eg.SetLimit(concurrencyPipelineResolver)
 	token := ""
 	for {
 		pipelines, err := c.client.ListPipelineServices(ctx, connect.NewRequest(&tailorv1.ListPipelineServicesRequest{
