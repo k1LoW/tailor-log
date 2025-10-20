@@ -58,24 +58,35 @@ func (c *Client) SendLogs(ctx context.Context, in <-chan *item.Item) error {
 			"status": slog.Level(it.Level).String(),
 		}
 		maps.Copy(properties, it.Attrs)
-		buf = append(buf, datadogV2.HTTPLogItem{
+		li := datadogV2.HTTPLogItem{
 			Ddsource:             datadog.PtrString(it.Source),
 			Ddtags:               datadog.PtrString(strings.Join(c.cfg.Outputs.Datadog.Tags, ",")),
 			Message:              it.Message,
 			Service:              datadog.PtrString(c.cfg.Outputs.Datadog.Service),
 			AdditionalProperties: properties,
-		})
+		}
+		buf = append(buf, li)
 		b, err := json.Marshal(buf)
 		if err != nil {
 			return fmt.Errorf("failed to marshal log item: %w", err)
 		}
 		if len(buf) >= maxLogsPerRequest || len(b)+capSize >= maxPayloadSize {
-			slog.Info("Submitting logs to Datadog", "count", len(buf))
-			_, _, err := c.logApi.SubmitLog(ctx, buf, *datadogV2.NewSubmitLogOptionalParameters().WithContentEncoding(datadogV2.CONTENTENCODING_GZIP))
-			if err != nil {
-				return fmt.Errorf("failed to submit logs to Datadog: %w", err)
+			if len(buf) == 1 {
+				slog.Info("Submitting large log to Datadog", "count", len(buf))
+				_, _, err := c.logApi.SubmitLog(ctx, buf, *datadogV2.NewSubmitLogOptionalParameters().WithContentEncoding(datadogV2.CONTENTENCODING_GZIP))
+				if err != nil {
+					return fmt.Errorf("failed to submit log to Datadog: %w", err)
+				}
+				buf = make([]datadogV2.HTTPLogItem, 0, maxLogsPerRequest) // reset
+			} else {
+				slog.Info("Submitting logs to Datadog", "count", len(buf[:len(buf)-1]))
+				_, _, err := c.logApi.SubmitLog(ctx, buf[:len(buf)-1], *datadogV2.NewSubmitLogOptionalParameters().WithContentEncoding(datadogV2.CONTENTENCODING_GZIP))
+				if err != nil {
+					return fmt.Errorf("failed to submit logs to Datadog: %w", err)
+				}
+				buf = make([]datadogV2.HTTPLogItem, 0, maxLogsPerRequest) // reset
+				buf = append(buf, li)                                     // add the last one
 			}
-			buf = make([]datadogV2.HTTPLogItem, 0, maxLogsPerRequest) // reset
 		}
 	}
 	if len(buf) > 0 {
