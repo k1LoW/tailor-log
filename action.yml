@@ -53,5 +53,5 @@ runs:
       env:
         TAILOR_TOKEN: ${{ inputs.tailor-token }}
         GITHUB_TOKEN: ${{ inputs.github-token }}
-        DD_API_KEY: ${{ inputs.datadog-api-token }}
+        DD_API_KEY: ${{ inputs.datadog-api-key }}
         DD_SITE: ${{ inputs.datadog-site }}
