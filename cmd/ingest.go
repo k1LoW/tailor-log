@@ -77,7 +77,7 @@ var ingestCmd = &cobra.Command{
 		}()
 		go func() {
 			// Memory usage logging
-			ticker := time.NewTicker(1 * time.Second)
+			ticker := time.NewTicker(10 * time.Second)
 			defer ticker.Stop()
 			for {
 				select {
