@@ -49,7 +49,7 @@ runs:
           const path = require('path');
           const inputs = ${{ toJSON(inputs) }};
           const toolpath = await io.which('tailor-log', true);
-          const opt = `--workspace-id ${inputs.workspace-id} --datadog-service ${inputs.datadog-service} --datadog-tag "${inputs.datadog-tags}" --pos artifact`;
+          const opt = `--workspace-id ${inputs['workspace-id']} --datadog-service ${inputs['datadog-service']} --datadog-tag "${inputs['datadog-tags']}" --pos artifact`;
           const options = {};
           await exec.exec(`${toolpath} ${opt}`, [], options);
       env:
