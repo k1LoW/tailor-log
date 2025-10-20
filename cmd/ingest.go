@@ -52,7 +52,7 @@ var ingestCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) (err error) {
 		ctx, _ := donegroup.WithCancel(cmd.Context())
 		ctx, cancel := signal.NotifyContext(ctx, syscall.SIGINT, syscall.SIGTERM)
-		p, err := pos.RestoreFrom(ctx, posType)
+		p, err := pos.RestoreFrom(ctx, posType, workspaceID)
 		if err != nil {
 			return err
 		}

@@ -16,7 +16,7 @@ import (
 	"github.com/k1LoW/tailor-log/item"
 )
 
-const maxLogsPerRequest = 100
+const maxLogsPerRequest = 50
 
 type Client struct {
 	logApi *datadogV2.LogsApi
