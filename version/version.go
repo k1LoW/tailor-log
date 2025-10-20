@@ -2,7 +2,7 @@ package version
 
 const (
 	Name    = "tailor-log"
-	Version = "0.2.4"
+	Version = "0.2.5"
 )
 
 var Revision = "HEAD"
