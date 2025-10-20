@@ -1,0 +1,83 @@
+version: 2
+before:
+  hooks:
+    - go mod download
+    - go mod tidy
+builds:
+  -
+    id: tailor-log-darwin
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w -X github.com/k1LoW/tailor-log/version.Revision={{.ShortCommit}}
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+  -
+    id: tailor-log-windows
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w -X github.com/k1LoW/tailor-log/version.Revision={{.ShortCommit}}
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - windows
+    goarch:
+      - amd64
+  -
+    id: tailor-log-linux
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w -X github.com/k1LoW/tailor-log/version.Revision={{.ShortCommit}}
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+archives:
+  -
+    id: tailor-log-archive
+    name_template: '{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    format_overrides:
+      - goos: darwin
+        formats:
+          - zip
+    files:
+      - LICENSE
+      - CREDITS
+      - README.md
+      - CHANGELOG.md
+checksum:
+  name_template: 'checksums.txt'
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
+nfpms:
+  -
+    id: tailor-log-nfpms
+    file_name_template: "{{ .ProjectName }}_{{ .Version }}-1_{{ .Arch }}"
+    builds:
+      - tailor-log-linux
+    homepage: https://github.com/k1LoW/tailor-log
+    maintainer: Ken'ichiro Oyama <k1lowxb@gmail.com>
+    description: tailor-log is a tool for handling logs from a workspace on the Tailor Platform.
+    license: MIT
+    formats:
+      - deb
+      - rpm
+      - apk
+    bindir: /usr/bin
+    epoch: 1
+release:
+  use_existing_draft: true

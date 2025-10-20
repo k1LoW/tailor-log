@@ -1,0 +1,144 @@
+package pos
+
+import (
+	"bytes"
+	"context"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"log/slog"
+	"os"
+	"strings"
+	"sync"
+	"time"
+
+	"github.com/k1LoW/go-github-actions/artifact"
+)
+
+var defaultTimeBefore = -12 * time.Hour
+
+const (
+	posTypeFile      = "file"
+	posTypeArtificat = "artifact"
+
+	posFileName    = "tailor-log.pos.json"
+	posArtifactKey = "tailor-log-pos"
+)
+
+type Pos struct {
+	m           sync.Map
+	defaultTime time.Time
+}
+
+func New() *Pos {
+	return &Pos{
+		defaultTime: time.Now().Add(defaultTimeBefore),
+	}
+}
+
+func (p *Pos) Store(key string, value time.Time) {
+	p.m.Store(key, value)
+}
+
+func (p *Pos) Load(key string) time.Time {
+	if v, ok := p.m.Load(key); ok {
+		t, ok := v.(time.Time)
+		if !ok {
+			return p.defaultTime
+		}
+		return t
+	}
+	return p.defaultTime
+}
+
+func RestoreFrom(ctx context.Context, posType string) (*Pos, error) {
+	switch posType {
+	case posTypeFile:
+		b, err := os.ReadFile(posFileName)
+		if err != nil {
+			if os.IsNotExist(err) {
+				slog.Info("Position file does not exist, starting from default position", "file", posFileName)
+				return New(), nil
+			}
+			return nil, err
+		}
+		slog.Info("Restored position from file", "file", posFileName)
+		return Restore(b)
+	case posTypeArtificat:
+		ownerrepo := strings.Split(os.Getenv("GITHUB_REPOSITORY"), "/")
+		if len(ownerrepo) != 2 {
+			return nil, fmt.Errorf("invalid GITHUB_REPOSITORY: %s", os.Getenv("GITHUB_REPOSITORY"))
+		}
+		owner := ownerrepo[0]
+		repo := ownerrepo[1]
+		b, err := fetchLatestArtifact(ctx, owner, repo, posArtifactKey, posFileName)
+		if err != nil {
+			if errors.Is(err, ErrArtifactNotFound) {
+				return New(), nil
+			}
+			return nil, err
+		}
+		pos, err := Restore(b)
+		if err != nil {
+			return nil, err
+		}
+		slog.Info("Restored position from artifact", "key", posArtifactKey)
+		return pos, nil
+	default:
+		return nil, errors.New("unknown pos type: " + posType)
+	}
+}
+
+func Restore(b []byte) (*Pos, error) {
+	m := map[string]time.Time{}
+	if err := json.Unmarshal(b, &m); err != nil {
+		return nil, err
+	}
+	p := New()
+	for k, v := range m {
+		p.Store(k, v)
+	}
+	return p, nil
+}
+
+func (p *Pos) DumpTo(ctx context.Context, posType string) error {
+	switch posType {
+	case posTypeFile:
+		b, err := p.Dump()
+		if err != nil {
+			return err
+		}
+		slog.Info("Dumped position to file", "file", posFileName)
+		return os.WriteFile(posFileName, b, 0600)
+	case posTypeArtificat:
+		b, err := p.Dump()
+		if err != nil {
+			return err
+		}
+		slog.Info("Dumped position to file", "file", posFileName)
+		if err := artifact.Upload(ctx, posArtifactKey, posFileName, bytes.NewReader(b)); err != nil {
+			return err
+		}
+		slog.Info("Uploaded position to artifact", "key", posArtifactKey)
+		return nil
+	default:
+		return errors.New("unknown pos type: " + posType)
+	}
+}
+
+func (p *Pos) Dump() ([]byte, error) {
+	m := map[string]time.Time{}
+	p.m.Range(func(key, value any) bool {
+		t, ok := value.(time.Time)
+		if !ok {
+			return false
+		}
+		k, ok := key.(string)
+		if !ok {
+			return false
+		}
+		m[k] = t
+		return true
+	})
+	return json.Marshal(m)
+}
