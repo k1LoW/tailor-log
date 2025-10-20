@@ -43,13 +43,15 @@ runs:
         strict: true
     -
       name: Run tailor-log
-      run: |
-        tailor-log -v
-        tailor-log ingest --workspace-id ${{inputs.workspace-id}} \
-        --datadog-service ${{inputs.datadog-service}} \
-        --datadog-tag ${{inputs.datadog-tags}} \
-        --pos artifact
-      shell: bash
+      uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+      with:
+        script: |
+          const path = require('path');
+          const inputs = ${{ toJSON(inputs) }};
+          const toolpath = await io.which('tailor-log', true);
+          const opt = `--workspace-id ${inputs.workspace-id} --datadog-service ${inputs.datadog-service} --datadog-tag "${inputs.datadog-tags}" --pos artifact`;
+          const options = {};
+          await exec.exec(`${toolpath} ${opt}`, [], options);
       env:
         TAILOR_TOKEN: ${{ inputs.tailor-token }}
         GITHUB_TOKEN: ${{ inputs.github-token }}
