@@ -59,8 +59,18 @@ var ingestCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
+		out := make(chan *item.Item)
 		defer func() {
 			cancel()
+		L:
+			for {
+				select {
+				case <-out:
+				default:
+					break L
+				}
+			}
+			close(out)
 			if errr := donegroup.WaitWithTimeout(ctx, waitTimeout); errr != nil {
 				err = errors.Join(err, errr)
 			}
@@ -96,15 +106,16 @@ var ingestCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
-		out := make(chan *item.Item)
-		defer close(out)
 		dd, err := datadog.New(cfg)
 		if err != nil {
 			return err
 		}
 		donegroup.Go(ctx, func() error {
 			err := dd.SendLogs(ctx, out)
-			slog.Info("Datadog log sender stopped", "error", err)
+			if err != nil {
+				cancel()
+				slog.Info("Datadog log sender stopped", "error", err)
+			}
 			return err
 		})
 		eg, ctx := errgroup.WithContext(ctx)

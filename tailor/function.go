@@ -31,6 +31,12 @@ func (c *Client) FetchFunctionLogs(ctx context.Context, pos *pos.Pos, out chan<-
 	}()
 	token := ""
 	for {
+		select {
+		case <-ctx.Done():
+			return ctx.Err()
+		default:
+		}
+
 		executions, err := c.client.ListFunctionExecutions(ctx, connect.NewRequest(&tailorv1.ListFunctionExecutionsRequest{
 			WorkspaceId:   c.cfg.WorkspaceID,
 			PageSize:      maxPageSize,

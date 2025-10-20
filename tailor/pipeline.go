@@ -80,6 +80,12 @@ func (c *Client) fetchPipelineResolverLogs(ctx context.Context, namespaceName, n
 	}()
 	token := ""
 	for {
+		select {
+		case <-ctx.Done():
+			return ctx.Err()
+		default:
+		}
+
 		results, err := c.client.ListPipelineResolverExecutionResults(ctx, connect.NewRequest(&tailorv1.ListPipelineResolverExecutionResultsRequest{
 			WorkspaceId:   c.cfg.WorkspaceID,
 			NamespaceName: namespaceName,
