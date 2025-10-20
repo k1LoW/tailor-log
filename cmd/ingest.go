@@ -113,6 +113,7 @@ var ingestCmd = &cobra.Command{
 			return c.FetchPipelineResolverLogs(ctx, p, out)
 		})
 		if err := eg.Wait(); err != nil {
+			slog.Error("Error in fetching logs", "error", err)
 			return err
 		}
 		return nil
