@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.2.6](https://github.com/k1LoW/tailor-log/compare/v0.2.5...v0.2.6) - 2025-10-20
+### Fix bug 🐛
+- fix: improve error handling and log processing by @k1LoW in https://github.com/k1LoW/tailor-log/pull/15
+- fix: improve log submission with payload size and capacity checks by @k1LoW in https://github.com/k1LoW/tailor-log/pull/16
+
 ## [v0.2.5](https://github.com/k1LoW/tailor-log/compare/v0.2.4...v0.2.5) - 2025-10-20
 ### Fix bug 🐛
 - fix: handle context cancellation and improve channel management by @k1LoW in https://github.com/k1LoW/tailor-log/pull/12
