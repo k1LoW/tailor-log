@@ -23,6 +23,7 @@ package cmd
 
 import (
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -68,7 +69,11 @@ var ingestCmd = &cobra.Command{
 		cfg := &config.Config{}
 		cfg.WorkspaceID = workspaceID
 		cfg.Outputs.Datadog.Service = datadogService
-		cfg.Outputs.Datadog.Tags = datagogTags
+		var tags []string
+		for _, tag := range datagogTags {
+			tags = append(tags, strings.Split(tag, ",")...)
+		}
+		cfg.Outputs.Datadog.Tags = tags
 		c, err := tailor.New(cfg)
 		if err != nil {
 			return err
