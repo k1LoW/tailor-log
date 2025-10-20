@@ -44,9 +44,9 @@ runs:
     -
       name: Run tailor-log
       run: |
-        tailor-log ingest --workspace-id ${inputs.workspace-id} \
-        --datadog-service ${inputs.datadog-service} \
-        --datadog-tag ${inputs.datadog-tags} \
+        tailor-log ingest --workspace-id ${{inputs.workspace-id}} \
+        --datadog-service ${{inputs.datadog-service}} \
+        --datadog-tag ${{inputs.datadog-tags}} \
         --pos artifact
       shell: bash
       env:
