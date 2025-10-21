@@ -25,7 +25,7 @@ func fetchLatestArtifact(ctx context.Context, owner, repo, name, fp string) ([]b
 		return nil, err
 	}
 	const maxRedirect = 5
-	page := 0
+	page := 1
 	for {
 		l, res, err := client.Actions.ListArtifacts(ctx, owner, repo, &github.ListArtifactsOptions{
 			Name: &name,
