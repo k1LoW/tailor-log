@@ -28,7 +28,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var workspaceID string
+var (
+	workspaceID string
+	inputs      []string
+)
 
 var rootCmd = &cobra.Command{
 	Use:          "tailor-log",
@@ -46,4 +49,6 @@ func Execute() {
 
 func init() {
 	rootCmd.PersistentFlags().StringVarP(&workspaceID, "workspace-id", "w", "", "Workspace ID (required)")
+	_ = rootCmd.MarkPersistentFlagRequired("workspace-id")
+	rootCmd.PersistentFlags().StringSliceVarP(&inputs, "input", "", []string{"*"}, "Input sources (optional)")
 }

@@ -26,6 +26,7 @@ import (
 	"log/slog"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -66,6 +67,11 @@ var streamCmd = &cobra.Command{
 
 		cfg := &config.Config{}
 		cfg.WorkspaceID = workspaceID
+		var splitted []string
+		for _, input := range inputs {
+			splitted = append(splitted, strings.Split(input, ",")...)
+		}
+		cfg.Inputs = splitted
 		c, err := tailor.New(cfg)
 		if err != nil {
 			return err
@@ -116,5 +122,5 @@ var streamCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(streamCmd)
-	streamCmd.Flags().StringVarP(&fetchInterval, "fetch-interval", "i", "5sec", "Fetch interval duration")
+	streamCmd.Flags().StringVarP(&fetchInterval, "fetch-interval", "", "5sec", "Fetch interval duration")
 }

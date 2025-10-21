@@ -3,11 +3,13 @@ package tailor
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log/slog"
 	"time"
 
 	tailorv1 "buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go/tailor/v1"
 	"connectrpc.com/connect"
+	"github.com/IGLOU-EU/go-wildcard/v2"
 	"github.com/k1LoW/tailor-log/item"
 	"github.com/k1LoW/tailor-log/pos"
 	"google.golang.org/protobuf/types/known/structpb"
@@ -18,9 +20,10 @@ const (
 	SourceFunctionStandard    = "tailor_platform.function.standard"
 	SourceFunctionJob         = "tailor_platform.function.job"
 
-	functionPosKey = "function"
-	maxPageSize    = 1000
-	sortBy         = "finished_at"
+	functionPosKey         = "function"
+	functionInputKeyPrefix = "function"
+	maxPageSize            = 1000
+	sortBy                 = "finished_at"
 )
 
 func (c *Client) FetchFunctionLogs(ctx context.Context, pos *pos.Pos, out chan<- *item.Item) error {
@@ -54,6 +57,17 @@ func (c *Client) FetchFunctionLogs(ctx context.Context, pos *pos.Pos, out chan<-
 		}
 		slog.Info("Fetched function executions", "count", len(executions.Msg.GetExecutions()))
 		for _, exec := range executions.Msg.GetExecutions() {
+			inputKey := fmt.Sprintf("%s:%s", functionInputKeyPrefix, exec.ScriptName)
+			matched := false
+			for _, pattern := range c.cfg.Inputs {
+				if wildcard.Match(pattern, inputKey) {
+					matched = true
+					break
+				}
+			}
+			if !matched {
+				continue
+			}
 			source := SourceFunctionUnspecified
 			switch exec.Type {
 			case tailorv1.FunctionExecution_TYPE_STANDARD:

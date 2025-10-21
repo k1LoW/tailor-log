@@ -1,14 +1,9 @@
 package config
 
 type Config struct {
-	WorkspaceID string  `yaml:"workspaceID"`
-	Inputs      Inputs  `yaml:"inputs"`
-	Outputs     Outputs `yaml:"outputs"`
-}
-
-type Inputs struct {
-	Function []string `yaml:"function,omitempty,omitzero"`
-	Pipeline []string `yaml:"pipeline,omitempty,omitzero"`
+	WorkspaceID string   `yaml:"workspaceID"`
+	Inputs      []string `yaml:"inputs"`
+	Outputs     Outputs  `yaml:"outputs"`
 }
 
 type Outputs struct {

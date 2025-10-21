@@ -8,6 +8,7 @@ import (
 
 	tailorv1 "buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go/tailor/v1"
 	"connectrpc.com/connect"
+	"github.com/IGLOU-EU/go-wildcard/v2"
 	"github.com/k1LoW/tailor-log/item"
 	"github.com/k1LoW/tailor-log/pos"
 	"golang.org/x/sync/errgroup"
@@ -45,6 +46,17 @@ func (c *Client) FetchPipelineResolverLogs(ctx context.Context, pos *pos.Pos, ou
 				}
 				for _, resolver := range resolvers.Msg.GetPipelineResolvers() {
 					name := resolver.GetName()
+					inputKey := fmt.Sprintf("pipeline:%s:resolver:%s", namespaceName, name)
+					matched := false
+					for _, pattern := range c.cfg.Inputs {
+						if wildcard.Match(pattern, inputKey) {
+							matched = true
+							break
+						}
+					}
+					if !matched {
+						continue
+					}
 					eg.Go(func() error {
 						return c.fetchPipelineResolverLogs(ctx, namespaceName, name, pos, out)
 					})
