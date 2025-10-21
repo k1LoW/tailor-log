@@ -61,7 +61,6 @@ func fetchLatestArtifact(ctx context.Context, owner, repo, name, fp string) ([]b
 				return nil, err
 			}
 			for _, file := range reader.File {
-				slog.Info("Checking artifact file", "file_name", file.Name)
 				if file.Name != fp {
 					continue
 				}

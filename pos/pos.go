@@ -87,7 +87,12 @@ func RestoreFrom(ctx context.Context, posType, workspaceID string) (*Pos, error)
 		if err != nil {
 			return nil, err
 		}
-		slog.Info("Restored position from artifact", "key", posArtifactKey)
+		count := 0
+		pos.m.Range(func(key, value any) bool {
+			count++
+			return true
+		})
+		slog.Info("Restored position from artifact", "key", posArtifactKey, "pos_count", count)
 		return pos, nil
 	default:
 		return nil, errors.New("unknown pos type: " + posType)

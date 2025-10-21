@@ -24,6 +24,7 @@ const (
 
 func (c *Client) FetchFunctionLogs(ctx context.Context, pos *pos.Pos, out chan<- *item.Item) error {
 	oldest := pos.Load(functionPosKey)
+	slog.Info("Fetching function logs", "oldest", oldest)
 	latest := oldest
 	defer func() {
 		slog.Info("Fetched function logs", "oldest", oldest, "latest", latest)

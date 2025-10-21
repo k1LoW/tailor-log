@@ -72,6 +72,7 @@ func (c *Client) fetchPipelineResolverLogs(ctx context.Context, namespaceName, n
 	posKey := fmt.Sprintf("pipeline:%s:resolver:%s", namespaceName, name)
 	oldest := pos.Load(posKey)
 	latest := oldest
+	slog.Info("Fetching pipeline resolver logs", "namespace", namespaceName, "name", name, "oldest", oldest)
 	defer func() {
 		slog.Info("Fetched pipeline resolver logs", "namespace", namespaceName, "name", name, "oldest", oldest, "latest", latest)
 		pos.Store(posKey, latest)
