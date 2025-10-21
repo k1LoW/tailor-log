@@ -2,6 +2,7 @@ package tailor
 
 import (
 	"context"
+	"encoding/json"
 	"log/slog"
 	"time"
 
@@ -13,7 +14,7 @@ import (
 )
 
 const (
-	SourceFuncitonUnspecified = "tailor_platform.function.unspecified"
+	SourceFunctionUnspecified = "tailor_platform.function.unspecified"
 	SourceFunctionStandard    = "tailor_platform.function.standard"
 	SourceFunctionJob         = "tailor_platform.function.job"
 
@@ -53,7 +54,7 @@ func (c *Client) FetchFunctionLogs(ctx context.Context, pos *pos.Pos, out chan<-
 		}
 		slog.Info("Fetched function executions", "count", len(executions.Msg.GetExecutions()))
 		for _, exec := range executions.Msg.GetExecutions() {
-			source := SourceFuncitonUnspecified
+			source := SourceFunctionUnspecified
 			switch exec.Type {
 			case tailorv1.FunctionExecution_TYPE_STANDARD:
 				source = SourceFunctionStandard
@@ -69,6 +70,16 @@ func (c *Client) FetchFunctionLogs(ctx context.Context, pos *pos.Pos, out chan<-
 			case tailorv1.FunctionExecution_STATUS_FAILED:
 				level = item.LevelError
 			}
+
+			var result any = exec.Result
+			var resultJSON map[string]any
+			// construct result as json if string is valid json
+			if len(exec.Result) > 0 && (exec.Result[0] == '{' || exec.Result[0] == '[') {
+				if err := json.Unmarshal([]byte(exec.Result), &resultJSON); err == nil {
+					result = resultJSON
+				}
+			}
+
 			attrs := map[string]any{
 				"tailor_platform.workspaceId":          exec.WorkspaceId,
 				"tailor_platform.function.executionId": exec.Id,
@@ -78,6 +89,7 @@ func (c *Client) FetchFunctionLogs(ctx context.Context, pos *pos.Pos, out chan<-
 				"tailor_platform.function.logs":        exec.Logs,
 				"tailor_platform.function.startedAt":   exec.StartedAt.AsTime().Format(time.RFC3339Nano),
 				"tailor_platform.function.finishedAt":  exec.FinishedAt.AsTime().Format(time.RFC3339Nano),
+				"tailor_platform.function.result":      result,
 			}
 			out <- &item.Item{
 				Source:  source,
