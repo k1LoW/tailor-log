@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.5.0](https://github.com/k1LoW/tailor-log/compare/v0.4.0...v0.5.0) - 2025-10-21
+### New Features 🎉
+- feat: add `stream` command to fetch log from Tailor Platform by @k1LoW in https://github.com/k1LoW/tailor-log/pull/28
+### Other Changes
+- feat: add support for input filtering with wildcard patterns by @k1LoW in https://github.com/k1LoW/tailor-log/pull/30
+
 ## [v0.4.0](https://github.com/k1LoW/tailor-log/compare/v0.3.3...v0.4.0) - 2025-10-21
 ### New Features 🎉
 - feat(function): send function result by @jackchuka in https://github.com/k1LoW/tailor-log/pull/27
