@@ -37,7 +37,7 @@ func fetchLatestArtifact(ctx context.Context, owner, repo, name, fp string) ([]b
 		if err != nil {
 			return nil, err
 		}
-		slog.Info("Listed artifacts", "page", page, "artifacts_count", len(l.Artifacts))
+		slog.Info("Listed artifacts", "owner", owner, "repo", repo, "artifact_name", name, "artifacts_count", len(l.Artifacts), "res", res)
 		page += 1
 		for _, a := range l.Artifacts {
 			u, _, err := client.Actions.DownloadArtifact(ctx, owner, repo, a.GetID(), maxRedirect)
