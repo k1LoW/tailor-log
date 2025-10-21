@@ -66,6 +66,7 @@ var streamCmd = &cobra.Command{
 
 		cfg := &config.Config{}
 		cfg.WorkspaceID = workspaceID
+		cfg.Inputs = inputs
 		c, err := tailor.New(cfg)
 		if err != nil {
 			return err
@@ -116,5 +117,5 @@ var streamCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(streamCmd)
-	streamCmd.Flags().StringVarP(&fetchInterval, "fetch-interval", "i", "5sec", "Fetch interval duration")
+	streamCmd.Flags().StringVarP(&fetchInterval, "fetch-interval", "", "5sec", "Fetch interval duration")
 }

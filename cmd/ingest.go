@@ -93,6 +93,7 @@ var ingestCmd = &cobra.Command{
 
 		cfg := &config.Config{}
 		cfg.WorkspaceID = workspaceID
+		cfg.Inputs = inputs
 		cfg.Outputs.Datadog.Service = datadogService
 		var tags []string
 		for _, tag := range datagogTags {
