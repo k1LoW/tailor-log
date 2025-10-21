@@ -38,6 +38,13 @@ func New(workspaceID string) *Pos {
 	}
 }
 
+func From(workspaceID string, t time.Time) *Pos {
+	return &Pos{
+		workspaceID: workspaceID,
+		defaultTime: t,
+	}
+}
+
 func (p *Pos) Store(key string, value time.Time) {
 	p.m.Store(key, value)
 }
