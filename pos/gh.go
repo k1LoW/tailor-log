@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"log/slog"
 	"net/http"
 	"time"
 
@@ -36,6 +37,7 @@ func fetchLatestArtifact(ctx context.Context, owner, repo, name, fp string) ([]b
 		if err != nil {
 			return nil, err
 		}
+		slog.Info("Listed artifacts", "page", page, "artifacts_count", len(l.Artifacts))
 		page += 1
 		for _, a := range l.Artifacts {
 			u, _, err := client.Actions.DownloadArtifact(ctx, owner, repo, a.GetID(), maxRedirect)
@@ -59,6 +61,7 @@ func fetchLatestArtifact(ctx context.Context, owner, repo, name, fp string) ([]b
 				return nil, err
 			}
 			for _, file := range reader.File {
+				slog.Info("Checking artifact file", "file_name", file.Name)
 				if file.Name != fp {
 					continue
 				}

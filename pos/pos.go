@@ -78,6 +78,7 @@ func RestoreFrom(ctx context.Context, posType, workspaceID string) (*Pos, error)
 		b, err := fetchLatestArtifact(ctx, owner, repo, posArtifactKey, posFileName)
 		if err != nil {
 			if errors.Is(err, ErrArtifactNotFound) {
+				slog.Info("Position artifact does not exist, starting from default position", "key", posArtifactKey)
 				return New(workspaceID), nil
 			}
 			return nil, err
