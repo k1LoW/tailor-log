@@ -26,10 +26,11 @@ import (
 	"os"
 
 	"github.com/k1LoW/tailor-log/cmd"
+	"github.com/k1LoW/tailor-log/version"
 )
 
 func main() {
-	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
+	logger := slog.New(slog.NewJSONHandler(os.Stdout, nil)).With("version", version.Version)
 	slog.SetDefault(logger)
 	cmd.Execute()
 }
