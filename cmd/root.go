@@ -49,6 +49,6 @@ func Execute() {
 
 func init() {
 	rootCmd.PersistentFlags().StringVarP(&workspaceID, "workspace-id", "w", "", "Workspace ID (required)")
-	rootCmd.MarkPersistentFlagRequired("workspace-id")
+	_ = rootCmd.MarkPersistentFlagRequired("workspace-id")
 	rootCmd.PersistentFlags().StringSliceVarP(&inputs, "input", "", []string{"*"}, "Input sources (optional)")
 }
