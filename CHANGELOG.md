@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.4.0](https://github.com/k1LoW/tailor-log/compare/v0.3.3...v0.4.0) - 2025-10-21
+### New Features 🎉
+- feat(function): send function result by @jackchuka in https://github.com/k1LoW/tailor-log/pull/27
+### Other Changes
+- chore(deps): bump the dependencies group with 3 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/26
+
 ## [v0.3.3](https://github.com/k1LoW/tailor-log/compare/v0.3.2...v0.3.3) - 2025-10-21
 
 ## [v0.3.2](https://github.com/k1LoW/tailor-log/compare/v0.3.1...v0.3.2) - 2025-10-21
