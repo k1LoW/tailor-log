@@ -93,7 +93,11 @@ var ingestCmd = &cobra.Command{
 
 		cfg := &config.Config{}
 		cfg.WorkspaceID = workspaceID
-		cfg.Inputs = inputs
+		var splitted []string
+		for _, input := range inputs {
+			splitted = append(splitted, strings.Split(input, ",")...)
+		}
+		cfg.Inputs = splitted
 		cfg.Outputs.Datadog.Service = datadogService
 		var tags []string
 		for _, tag := range datagogTags {

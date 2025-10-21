@@ -26,6 +26,7 @@ import (
 	"log/slog"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -66,7 +67,11 @@ var streamCmd = &cobra.Command{
 
 		cfg := &config.Config{}
 		cfg.WorkspaceID = workspaceID
-		cfg.Inputs = inputs
+		var splitted []string
+		for _, input := range inputs {
+			splitted = append(splitted, strings.Split(input, ",")...)
+		}
+		cfg.Inputs = splitted
 		c, err := tailor.New(cfg)
 		if err != nil {
 			return err
