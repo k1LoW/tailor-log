@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.5.1](https://github.com/k1LoW/tailor-log/compare/v0.5.0...v0.5.1) - 2025-10-22
+### Other Changes
+- chore: setup trivy for license check by @k1LoW in https://github.com/k1LoW/tailor-log/pull/32
+
 ## [v0.5.0](https://github.com/k1LoW/tailor-log/compare/v0.4.0...v0.5.0) - 2025-10-21
 ### New Features 🎉
 - feat: add `stream` command to fetch log from Tailor Platform by @k1LoW in https://github.com/k1LoW/tailor-log/pull/28
