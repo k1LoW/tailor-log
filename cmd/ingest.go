@@ -45,7 +45,7 @@ const waitTimeout = 60 * time.Second
 var (
 	posType        string
 	datadogService string
-	datagogTags    []string
+	datadogTags    []string
 )
 
 var ingestCmd = &cobra.Command{
@@ -100,7 +100,7 @@ var ingestCmd = &cobra.Command{
 		cfg.Inputs = splitted
 		cfg.Outputs.Datadog.Service = datadogService
 		var tags []string
-		for _, tag := range datagogTags {
+		for _, tag := range datadogTags {
 			tags = append(tags, strings.Split(tag, ",")...)
 		}
 		cfg.Outputs.Datadog.Tags = tags
@@ -142,5 +142,5 @@ func init() {
 	rootCmd.AddCommand(ingestCmd)
 	ingestCmd.Flags().StringVarP(&posType, "pos", "", "file", "position type (file|artifact)")
 	ingestCmd.Flags().StringVarP(&datadogService, "datadog-service", "", "", "Datadog service name")
-	ingestCmd.Flags().StringSliceVarP(&datagogTags, "datadog-tag", "", []string{}, "Datadog tag")
+	ingestCmd.Flags().StringSliceVarP(&datadogTags, "datadog-tag", "", []string{}, "Datadog tag")
 }
