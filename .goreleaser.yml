@@ -67,7 +67,7 @@ nfpms:
   -
     id: tailor-log-nfpms
     file_name_template: "{{ .ProjectName }}_{{ .Version }}-1_{{ .Arch }}"
-    builds:
+    ids:
       - tailor-log-linux
     homepage: https://github.com/k1LoW/tailor-log
     maintainer: Ken'ichiro Oyama <k1lowxb@gmail.com>
