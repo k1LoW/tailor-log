@@ -6,7 +6,7 @@ require (
 	buf.build/gen/go/tailor-inc/tailor/connectrpc/go v1.19.1-20251015043835-ab63191facd7.2
 	buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go v1.36.10-20251015043835-ab63191facd7.1
 	connectrpc.com/connect v1.19.1
-	github.com/DataDog/datadog-api-client-go/v2 v2.48.0
+	github.com/DataDog/datadog-api-client-go/v2 v2.49.0
 	github.com/IGLOU-EU/go-wildcard/v2 v2.1.0
 	github.com/google/go-github/v75 v75.0.0
 	github.com/k1LoW/donegroup v1.10.2
