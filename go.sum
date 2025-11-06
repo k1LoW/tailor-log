@@ -18,8 +18,8 @@ github.com/Azure/azure-sdk-for-go/sdk/storage/azblob v1.6.3 h1:ZJJNFaQ86GVKQ9ehw
 github.com/Azure/azure-sdk-for-go/sdk/storage/azblob v1.6.3/go.mod h1:URuDvhmATVKqHBH9/0nOiNKk0+YcwfQ3WkK5PqHKxc8=
 github.com/AzureAD/microsoft-authentication-library-for-go v1.5.0 h1:XkkQbfMyuH2jTSjQjSoihryI8GINRcs4xp8lNawg0FI=
 github.com/AzureAD/microsoft-authentication-library-for-go v1.5.0/go.mod h1:HKpQxkWaGLJ+D/5H8QRpyQXA1eKjxkFlOMwck5+33Jk=
-github.com/DataDog/datadog-api-client-go/v2 v2.48.0 h1:OcVkuSh1+R2BK38pXWHZsKlzAglgJwlS600zTwkwvbs=
-github.com/DataDog/datadog-api-client-go/v2 v2.48.0/go.mod h1:d3tOEgUd2kfsr9uuHQdY+nXrWp4uikgTgVCPdKNK30U=
+github.com/DataDog/datadog-api-client-go/v2 v2.49.0 h1:44ltl4mpJCtUdBLvOvXcCcvNewB+beDesZaoQYZqjCc=
+github.com/DataDog/datadog-api-client-go/v2 v2.49.0/go.mod h1:d3tOEgUd2kfsr9uuHQdY+nXrWp4uikgTgVCPdKNK30U=
 github.com/DataDog/zstd v1.5.7 h1:ybO8RBeh29qrxIhCA9E8gKY6xfONU9T6G6aP9DTKfLE=
 github.com/DataDog/zstd v1.5.7/go.mod h1:g4AWEaM3yOg3HYfnJ3YIawPnVdXJh9QME85blwSAmyw=
 github.com/IGLOU-EU/go-wildcard/v2 v2.1.0 h1:WFqyYAuIYLJ6mHZ4rp/bYXiR4E1IvXW4+zInYWdQBqI=
