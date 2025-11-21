@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.5.2](https://github.com/k1LoW/tailor-log/compare/v0.5.1...v0.5.2) - 2025-11-20
+### Other Changes
+- chore(deps): bump the dependencies group across 1 directory with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/36
+- chore(deps): bump golang.org/x/crypto from 0.43.0 to 0.45.0 by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/38
+
 ## [v0.5.1](https://github.com/k1LoW/tailor-log/compare/v0.5.0...v0.5.1) - 2025-11-06
 ### Other Changes
 - chore: setup trivy for license check by @k1LoW in https://github.com/k1LoW/tailor-log/pull/32
