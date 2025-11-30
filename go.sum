@@ -67,8 +67,8 @@ github.com/k1LoW/donegroup v1.10.2 h1:T3XWToJqsT9Gr+WBnxKV8FupE6x7LL0UsfMiYJrD8W
 github.com/k1LoW/donegroup v1.10.2/go.mod h1:I/s+pK8/noQoE7lY3ecYwhXOBvcKGYOBeKtSBlM6IXk=
 github.com/k1LoW/duration v1.2.0 h1:qq1gWtPh7YROFyerBufVP+ATR11mOOHDInrcC/Xe/6A=
 github.com/k1LoW/duration v1.2.0/go.mod h1:qUa0NptIiUl5EUsCc8wIiSaHuNjS4wmpYNMHp0l6pos=
-github.com/k1LoW/errors v1.1.0 h1:ybrPBJApN+CDaouedGEbJGEl6EtWhse9LThRhgfrOZ0=
-github.com/k1LoW/errors v1.1.0/go.mod h1:FnyqU5omnd/+J2ViEsDaIZXTZGuRMZ5uDpLEqrEsMp4=
+github.com/k1LoW/errors v1.1.1 h1:CrXtr1hSQP2mlJmlIPm3j1kJHnXgnGzZmCPvzYRkdBM=
+github.com/k1LoW/errors v1.1.1/go.mod h1:FnyqU5omnd/+J2ViEsDaIZXTZGuRMZ5uDpLEqrEsMp4=
 github.com/k1LoW/go-github-actions v0.2.0 h1:mapLYH+IhOl43AOnlRyKavii2MJIVKbOhoY1CHeuqDQ=
 github.com/k1LoW/go-github-actions v0.2.0/go.mod h1:nXmJLfGK9f9komDwGYKcDdFHdMoorzse0qRiZl5dvoA=
 github.com/k1LoW/go-github-client/v75 v75.0.21 h1:37FoDhcm+JnfCnDpCHBiLQyqVMYqBhwlAuGAm5hVIog=

@@ -11,7 +11,7 @@ require (
 	github.com/google/go-github/v75 v75.0.0
 	github.com/k1LoW/donegroup v1.10.2
 	github.com/k1LoW/duration v1.2.0
-	github.com/k1LoW/errors v1.1.0
+	github.com/k1LoW/errors v1.1.1
 	github.com/k1LoW/go-github-actions v0.2.0
 	github.com/k1LoW/go-github-client/v75 v75.0.21
 	github.com/spf13/cobra v1.10.1
