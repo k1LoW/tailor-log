@@ -1,9 +1,9 @@
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.10-20250912141014-52f32327d4b0.1 h1:31on4W/yPcV4nZHL4+UCiCvLPsMqe/vJcNg8Rci0scc=
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.10-20250912141014-52f32327d4b0.1/go.mod h1:fUl8CEN/6ZAMk6bP8ahBJPUJw7rbp+j4x+wCcYi2IG4=
-buf.build/gen/go/tailor-inc/tailor/connectrpc/go v1.19.1-20251015043835-ab63191facd7.2 h1:LaKzRDYh4Nks75tmttKRymm++gTXB3HJ9xmM4LxGxJE=
-buf.build/gen/go/tailor-inc/tailor/connectrpc/go v1.19.1-20251015043835-ab63191facd7.2/go.mod h1:WpaTNWKM+O2fFULrgvNV3vPg+sHtlfBP9mPWJS3Imd4=
-buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go v1.36.10-20251015043835-ab63191facd7.1 h1:/+mcOtsHWYmh/vC9DfgizA3QkPLLXT7kVmsXECAIg3Y=
-buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go v1.36.10-20251015043835-ab63191facd7.1/go.mod h1:po6RqrFzRVYHsnq85z8tc5L7je7UkXpppc0w1ceqD3o=
+buf.build/gen/go/tailor-inc/tailor/connectrpc/go v1.19.1-20251202081801-942bda9344b6.2 h1:HF7MCns40fT43R7klj1EiVnLUJrHLYgKZXR0sXgmdbQ=
+buf.build/gen/go/tailor-inc/tailor/connectrpc/go v1.19.1-20251202081801-942bda9344b6.2/go.mod h1:ejMVkrqjVbidOEhKUfey8FVSRSVu+9HNbL8h1x7Nh7w=
+buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go v1.36.10-20251202081801-942bda9344b6.1 h1:Vw6lezhE8Xsp4xhe0ufL8FkAYF9JF0wtz9mOapSNhBM=
+buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go v1.36.10-20251202081801-942bda9344b6.1/go.mod h1:po6RqrFzRVYHsnq85z8tc5L7je7UkXpppc0w1ceqD3o=
 connectrpc.com/connect v1.19.1 h1:R5M57z05+90EfEvCY1b7hBxDVOUl45PrtXtAV2fOC14=
 connectrpc.com/connect v1.19.1/go.mod h1:tN20fjdGlewnSFeZxLKb0xwIZ6ozc3OQs2hTXy4du9w=
 github.com/Azure/azure-sdk-for-go/sdk/azcore v1.19.1 h1:5YTBM8QDVIBN3sxBil89WfdAAqDZbyJTgh688DSxX5w=
@@ -67,8 +67,8 @@ github.com/k1LoW/donegroup v1.10.2 h1:T3XWToJqsT9Gr+WBnxKV8FupE6x7LL0UsfMiYJrD8W
 github.com/k1LoW/donegroup v1.10.2/go.mod h1:I/s+pK8/noQoE7lY3ecYwhXOBvcKGYOBeKtSBlM6IXk=
 github.com/k1LoW/duration v1.2.0 h1:qq1gWtPh7YROFyerBufVP+ATR11mOOHDInrcC/Xe/6A=
 github.com/k1LoW/duration v1.2.0/go.mod h1:qUa0NptIiUl5EUsCc8wIiSaHuNjS4wmpYNMHp0l6pos=
-github.com/k1LoW/errors v1.1.0 h1:ybrPBJApN+CDaouedGEbJGEl6EtWhse9LThRhgfrOZ0=
-github.com/k1LoW/errors v1.1.0/go.mod h1:FnyqU5omnd/+J2ViEsDaIZXTZGuRMZ5uDpLEqrEsMp4=
+github.com/k1LoW/errors v1.1.1 h1:CrXtr1hSQP2mlJmlIPm3j1kJHnXgnGzZmCPvzYRkdBM=
+github.com/k1LoW/errors v1.1.1/go.mod h1:FnyqU5omnd/+J2ViEsDaIZXTZGuRMZ5uDpLEqrEsMp4=
 github.com/k1LoW/go-github-actions v0.2.0 h1:mapLYH+IhOl43AOnlRyKavii2MJIVKbOhoY1CHeuqDQ=
 github.com/k1LoW/go-github-actions v0.2.0/go.mod h1:nXmJLfGK9f9komDwGYKcDdFHdMoorzse0qRiZl5dvoA=
 github.com/k1LoW/go-github-client/v75 v75.0.21 h1:37FoDhcm+JnfCnDpCHBiLQyqVMYqBhwlAuGAm5hVIog=
@@ -102,8 +102,8 @@ github.com/rogpeppe/go-internal v1.12.0/go.mod h1:E+RYuTGaKKdloAfM02xzb0FW3Paa99
 github.com/russross/blackfriday/v2 v2.1.0/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
 github.com/segmentio/asm v1.2.1 h1:DTNbBqs57ioxAD4PrArqftgypG4/qNpXoJx8TVXxPR0=
 github.com/segmentio/asm v1.2.1/go.mod h1:BqMnlJP91P8d+4ibuonYZw9mfnzI9HfxselHZr5aAcs=
-github.com/spf13/cobra v1.10.1 h1:lJeBwCfmrnXthfAupyUTzJ/J4Nc1RsHC/mSRU2dll/s=
-github.com/spf13/cobra v1.10.1/go.mod h1:7SmJGaTHFVBY0jW4NXGluQoLvhqFQM+6XSKD+P4XaB0=
+github.com/spf13/cobra v1.10.2 h1:DMTTonx5m65Ic0GOoRY2c16WCbHxOOw6xxezuLaBpcU=
+github.com/spf13/cobra v1.10.2/go.mod h1:7C1pvHqHw5A4vrJfjNwvOdzYu0Gml16OCs2GRiTUUS4=
 github.com/spf13/pflag v1.0.9/go.mod h1:McXfInJRrz4CZXVZOBLb0bTZqETkiAhM9Iw0y3An2Bg=
 github.com/spf13/pflag v1.0.10 h1:4EBh2KAYBwaONj6b2Ye1GiHfwjqyROoF4RwYO+vPwFk=
 github.com/spf13/pflag v1.0.10/go.mod h1:McXfInJRrz4CZXVZOBLb0bTZqETkiAhM9Iw0y3An2Bg=
@@ -124,6 +124,7 @@ go.opentelemetry.io/otel/sdk/metric v1.37.0 h1:90lI228XrB9jCMuSdA0673aubgRobVZFh
 go.opentelemetry.io/otel/sdk/metric v1.37.0/go.mod h1:cNen4ZWfiD37l5NhS+Keb5RXVWZWpRE+9WyVCpbo5ps=
 go.opentelemetry.io/otel/trace v1.37.0 h1:HLdcFNbRQBE2imdSEgm/kwqmQj1Or1l/7bW6mxVK7z4=
 go.opentelemetry.io/otel/trace v1.37.0/go.mod h1:TlgrlQ+PtQO5XFerSPUYG0JSgGyryXewPGyayAWSBS0=
+go.yaml.in/yaml/v3 v3.0.4/go.mod h1:DhzuOOF2ATzADvBadXxruRBLzYTpT36CKvDb3+aBEFg=
 golang.org/x/crypto v0.45.0 h1:jMBrvKuj23MTlT0bQEOBcAE0mjg8mK9RXFhRH6nyF3Q=
 golang.org/x/crypto v0.45.0/go.mod h1:XTGrrkGJve7CYK7J8PEww4aY7gM3qMCElcJQ8n8JdX4=
 golang.org/x/net v0.47.0 h1:Mx+4dIFzqraBXUugkia1OOvlD6LemFo1ALMHjrXDOhY=
