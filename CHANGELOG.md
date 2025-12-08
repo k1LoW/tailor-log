@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.5.3](https://github.com/k1LoW/tailor-log/compare/v0.5.2...v0.5.3) - 2025-12-08
+### Other Changes
+- chore(deps): bump github.com/k1LoW/go-github-client/v75 from 75.0.19 to 75.0.21 in the dependencies group by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/40
+- chore(deps): bump the dependencies group with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/39
+- chore(deps): bump the dependencies group across 1 directory with 4 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/44
+
 ## [v0.5.2](https://github.com/k1LoW/tailor-log/compare/v0.5.1...v0.5.2) - 2025-11-20
 ### Other Changes
 - chore(deps): bump the dependencies group across 1 directory with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/36
