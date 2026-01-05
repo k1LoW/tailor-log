@@ -38,7 +38,7 @@ func New(workspaceID string) *Pos {
 	}
 }
 
-func From(workspaceID string, t time.Time) *Pos {
+func At(workspaceID string, t time.Time) *Pos {
 	return &Pos{
 		workspaceID: workspaceID,
 		minTime:     t,
@@ -111,11 +111,15 @@ func RestoreFrom(ctx context.Context, posType, workspaceID string) (*Pos, error)
 }
 
 func Restore(workspaceID string, b []byte) (*Pos, error) {
+	return RestoreAt(workspaceID, b, time.Now())
+}
+
+func RestoreAt(workspaceID string, b []byte, now time.Time) (*Pos, error) {
 	m := map[string]time.Time{}
 	if err := json.Unmarshal(b, &m); err != nil {
 		return nil, err
 	}
-	p := New(workspaceID)
+	p := At(workspaceID, now.Add(minTimeOffset))
 	for k, v := range m {
 		p.Store(k, v)
 	}

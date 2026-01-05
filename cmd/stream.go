@@ -55,7 +55,7 @@ var streamCmd = &cobra.Command{
 
 		ctx, _ := donegroup.WithCancel(cmd.Context())
 		ctx, cancel := signal.NotifyContext(ctx, syscall.SIGINT, syscall.SIGTERM)
-		p := pos.From(workspaceID, time.Now())
+		p := pos.At(workspaceID, time.Now())
 		out := make(chan *item.Item)
 		defer func() {
 			cancel()

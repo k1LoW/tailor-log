@@ -1,15 +1,16 @@
 package pos
 
 import (
-	"encoding/json"
 	"testing"
 	"time"
 )
 
 func TestDumpAndRestore(t *testing.T) {
 	workspaceID := "test_workspace"
-	// Use a fixed minTime that is before all test times
-	minTime := time.Date(2020, 1, 1, 0, 0, 0, 0, time.UTC)
+	// Use a fixed "now" time for testing
+	// minTimeOffset is -18h, so minTime will be now - 18h
+	// Test data times should be after minTime to be returned as-is
+	now := time.Date(2025, 1, 1, 0, 0, 0, 0, time.UTC)
 	tests := []struct {
 		name string
 		data map[string]time.Time
@@ -21,46 +22,46 @@ func TestDumpAndRestore(t *testing.T) {
 		{
 			name: "single entry",
 			data: map[string]time.Time{
-				"key1": time.Date(2024, 1, 1, 12, 0, 0, 0, time.UTC),
+				"key1": now.Add(-1 * time.Hour),
 			},
 		},
 		{
 			name: "multiple entries",
 			data: map[string]time.Time{
-				"key1": time.Date(2024, 1, 1, 12, 0, 0, 0, time.UTC),
-				"key2": time.Date(2024, 2, 15, 9, 30, 0, 0, time.UTC),
-				"key3": time.Date(2024, 3, 20, 18, 45, 30, 0, time.UTC),
+				"key1": now.Add(-1 * time.Hour),
+				"key2": now.Add(-2 * time.Hour),
+				"key3": now.Add(-3 * time.Hour),
 			},
 		},
 		{
 			name: "with nanoseconds",
 			data: map[string]time.Time{
-				"nano": time.Date(2024, 6, 15, 10, 20, 30, 123456789, time.UTC),
+				"nano": now.Add(-1*time.Hour + 123456789*time.Nanosecond),
 			},
 		},
 		{
 			name: "different timezones",
 			data: map[string]time.Time{
-				"utc": time.Date(2024, 5, 10, 14, 0, 0, 0, time.UTC),
-				"jst": time.Date(2024, 5, 10, 23, 0, 0, 0, time.FixedZone("JST", 9*60*60)),
+				"utc": now.Add(-1 * time.Hour).UTC(),
+				"jst": now.Add(-2 * time.Hour).In(time.FixedZone("JST", 9*60*60)),
 			},
 		},
 		{
 			name: "special characters in keys",
 			data: map[string]time.Time{
-				"key/with/slashes": time.Date(2024, 7, 1, 0, 0, 0, 0, time.UTC),
-				"key-with-dashes":  time.Date(2024, 7, 2, 0, 0, 0, 0, time.UTC),
-				"key_with_under":   time.Date(2024, 7, 3, 0, 0, 0, 0, time.UTC),
-				"key.with.dots":    time.Date(2024, 7, 4, 0, 0, 0, 0, time.UTC),
-				"key:with:colons":  time.Date(2024, 7, 5, 0, 0, 0, 0, time.UTC),
+				"key/with/slashes": now.Add(-1 * time.Hour),
+				"key-with-dashes":  now.Add(-2 * time.Hour),
+				"key_with_under":   now.Add(-3 * time.Hour),
+				"key.with.dots":    now.Add(-4 * time.Hour),
+				"key:with:colons":  now.Add(-5 * time.Hour),
 			},
 		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			// Create a new Pos using From with a fixed minTime
-			original := From(workspaceID, minTime)
+			// Create a new Pos using At with a fixed minTime
+			original := At(workspaceID, now.Add(minTimeOffset))
 			for k, v := range tt.data {
 				original.Store(k, v)
 			}
@@ -71,14 +72,10 @@ func TestDumpAndRestore(t *testing.T) {
 				t.Fatalf("Failed to dump position: %v", err)
 			}
 
-			// Restore from the dumped data using From
-			restored := From(workspaceID, minTime)
-			var m map[string]time.Time
-			if err := json.Unmarshal(dumped, &m); err != nil {
-				t.Fatalf("Failed to unmarshal dumped data: %v", err)
-			}
-			for k, v := range m {
-				restored.Store(k, v)
+			// Restore from the dumped data using RestoreAt
+			restored, err := RestoreAt(workspaceID, dumped, now)
+			if err != nil {
+				t.Fatalf("Failed to restore position: %v", err)
 			}
 
 			// Verify that all keys and values match
@@ -92,8 +89,9 @@ func TestDumpAndRestore(t *testing.T) {
 			// Verify that loading non-existent keys returns minTime
 			nonExistentKey := "non_existent_key_12345"
 			defaultTime := restored.Load(nonExistentKey)
-			if !defaultTime.Equal(minTime) {
-				t.Errorf("Loading non-existent key should return minTime, got %v", defaultTime)
+			expectedMinTime := now.Add(minTimeOffset)
+			if !defaultTime.Equal(expectedMinTime) {
+				t.Errorf("Loading non-existent key should return minTime %v, got %v", expectedMinTime, defaultTime)
 			}
 		})
 	}
