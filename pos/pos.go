@@ -15,7 +15,7 @@ import (
 	"github.com/k1LoW/go-github-actions/artifact"
 )
 
-var defaultTimeBefore = -12 * time.Hour
+var minTimeOffset = -18 * time.Hour
 
 const (
 	posTypeFile      = "file"
@@ -28,20 +28,20 @@ const (
 type Pos struct {
 	m           sync.Map
 	workspaceID string
-	defaultTime time.Time
+	minTime     time.Time
 }
 
 func New(workspaceID string) *Pos {
 	return &Pos{
 		workspaceID: workspaceID,
-		defaultTime: time.Now().Add(defaultTimeBefore),
+		minTime:     time.Now().Add(minTimeOffset),
 	}
 }
 
 func From(workspaceID string, t time.Time) *Pos {
 	return &Pos{
 		workspaceID: workspaceID,
-		defaultTime: t,
+		minTime:     t,
 	}
 }
 
@@ -53,11 +53,15 @@ func (p *Pos) Load(key string) time.Time {
 	if v, ok := p.m.Load(key); ok {
 		t, ok := v.(time.Time)
 		if !ok {
-			return p.defaultTime
+			return p.minTime
+		}
+		// If the stored time is older than minTime, use minTime instead
+		if t.Before(p.minTime) {
+			return p.minTime
 		}
 		return t
 	}
-	return p.defaultTime
+	return p.minTime
 }
 
 func RestoreFrom(ctx context.Context, posType, workspaceID string) (*Pos, error) {

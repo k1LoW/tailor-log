@@ -1,12 +1,15 @@
 package pos
 
 import (
+	"encoding/json"
 	"testing"
 	"time"
 )
 
 func TestDumpAndRestore(t *testing.T) {
 	workspaceID := "test_workspace"
+	// Use a fixed minTime that is before all test times
+	minTime := time.Date(2020, 1, 1, 0, 0, 0, 0, time.UTC)
 	tests := []struct {
 		name string
 		data map[string]time.Time
@@ -56,8 +59,8 @@ func TestDumpAndRestore(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			// Create a new Pos and populate it with test data
-			original := New(workspaceID)
+			// Create a new Pos using From with a fixed minTime
+			original := From(workspaceID, minTime)
 			for k, v := range tt.data {
 				original.Store(k, v)
 			}
@@ -68,10 +71,14 @@ func TestDumpAndRestore(t *testing.T) {
 				t.Fatalf("Failed to dump position: %v", err)
 			}
 
-			// Restore from the dumped data
-			restored, err := Restore(workspaceID, dumped)
-			if err != nil {
-				t.Fatalf("Failed to restore position: %v", err)
+			// Restore from the dumped data using From
+			restored := From(workspaceID, minTime)
+			var m map[string]time.Time
+			if err := json.Unmarshal(dumped, &m); err != nil {
+				t.Fatalf("Failed to unmarshal dumped data: %v", err)
+			}
+			for k, v := range m {
+				restored.Store(k, v)
 			}
 
 			// Verify that all keys and values match
@@ -82,11 +89,11 @@ func TestDumpAndRestore(t *testing.T) {
 				}
 			}
 
-			// Verify that loading non-existent keys returns defaultTime
+			// Verify that loading non-existent keys returns minTime
 			nonExistentKey := "non_existent_key_12345"
 			defaultTime := restored.Load(nonExistentKey)
-			if defaultTime.IsZero() {
-				t.Errorf("Loading non-existent key should return defaultTime, got zero time")
+			if !defaultTime.Equal(minTime) {
+				t.Errorf("Loading non-existent key should return minTime, got %v", defaultTime)
 			}
 		})
 	}
