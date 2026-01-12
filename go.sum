@@ -1,9 +1,9 @@
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20250717185734-6c6e0d3c608e.1 h1:w2FnA+sUwLAm3VAF2Ed4e0SlTddb28TIKSov6UBCq1c=
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20250717185734-6c6e0d3c608e.1/go.mod h1:tvtbpgaVXZX4g6Pn+AnzFycuRK3MOz5HJfEGeEllXYM=
-buf.build/gen/go/tailor-inc/tailor/connectrpc/go v1.19.1-20251218081454-0966e00bfe9d.2 h1:lfSlRSvYxp/IhHh1edz5J18Gagn72ia0rs3echrnzEA=
-buf.build/gen/go/tailor-inc/tailor/connectrpc/go v1.19.1-20251218081454-0966e00bfe9d.2/go.mod h1:zgrNwcguKiERtiqMVYq+0zVvtjTkB1syFy1nfLJK5SI=
-buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go v1.36.11-20251218081454-0966e00bfe9d.1 h1:eTMAzhmrL/4Kt22S4uWBQOlDwK/Ie8J5W0nn3OgJsD0=
-buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go v1.36.11-20251218081454-0966e00bfe9d.1/go.mod h1:GL71deI8cQ8FZWLteqqpun9uB7ePxYUE/mTPpFDErx8=
+buf.build/gen/go/tailor-inc/tailor/connectrpc/go v1.19.1-20260105062423-e5dfac74c08b.2 h1:kKA1fq++DpLqzW1PY3shKkx03JVdRJK9Q/uNbYcMG1M=
+buf.build/gen/go/tailor-inc/tailor/connectrpc/go v1.19.1-20260105062423-e5dfac74c08b.2/go.mod h1:WMThAZKQ9M64grBtVkEzr1wkEQ7Qaw0o7WC1qwzYlmU=
+buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go v1.36.11-20260105062423-e5dfac74c08b.1 h1:IYwi0M0hNJMAtyI+KqLhdWhunJxgtV0eEm7CZaljEw4=
+buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go v1.36.11-20260105062423-e5dfac74c08b.1/go.mod h1:GL71deI8cQ8FZWLteqqpun9uB7ePxYUE/mTPpFDErx8=
 connectrpc.com/connect v1.19.1 h1:R5M57z05+90EfEvCY1b7hBxDVOUl45PrtXtAV2fOC14=
 connectrpc.com/connect v1.19.1/go.mod h1:tN20fjdGlewnSFeZxLKb0xwIZ6ozc3OQs2hTXy4du9w=
 github.com/Azure/azure-sdk-for-go/sdk/azcore v1.19.1 h1:5YTBM8QDVIBN3sxBil89WfdAAqDZbyJTgh688DSxX5w=
@@ -18,8 +18,8 @@ github.com/Azure/azure-sdk-for-go/sdk/storage/azblob v1.6.3 h1:ZJJNFaQ86GVKQ9ehw
 github.com/Azure/azure-sdk-for-go/sdk/storage/azblob v1.6.3/go.mod h1:URuDvhmATVKqHBH9/0nOiNKk0+YcwfQ3WkK5PqHKxc8=
 github.com/AzureAD/microsoft-authentication-library-for-go v1.5.0 h1:XkkQbfMyuH2jTSjQjSoihryI8GINRcs4xp8lNawg0FI=
 github.com/AzureAD/microsoft-authentication-library-for-go v1.5.0/go.mod h1:HKpQxkWaGLJ+D/5H8QRpyQXA1eKjxkFlOMwck5+33Jk=
-github.com/DataDog/datadog-api-client-go/v2 v2.52.0 h1:ET1faadCucJF/bmRwNN8eLoE0Ieqgg9QoufZgtsHI+g=
-github.com/DataDog/datadog-api-client-go/v2 v2.52.0/go.mod h1:d3tOEgUd2kfsr9uuHQdY+nXrWp4uikgTgVCPdKNK30U=
+github.com/DataDog/datadog-api-client-go/v2 v2.53.0 h1:uEHYFcjOGcBXwCcdIZir5bBlA5qJF1Rh0HptI5EAxv4=
+github.com/DataDog/datadog-api-client-go/v2 v2.53.0/go.mod h1:d3tOEgUd2kfsr9uuHQdY+nXrWp4uikgTgVCPdKNK30U=
 github.com/DataDog/zstd v1.5.7 h1:ybO8RBeh29qrxIhCA9E8gKY6xfONU9T6G6aP9DTKfLE=
 github.com/DataDog/zstd v1.5.7/go.mod h1:g4AWEaM3yOg3HYfnJ3YIawPnVdXJh9QME85blwSAmyw=
 github.com/IGLOU-EU/go-wildcard/v2 v2.1.0 h1:WFqyYAuIYLJ6mHZ4rp/bYXiR4E1IvXW4+zInYWdQBqI=
