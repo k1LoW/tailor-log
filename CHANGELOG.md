@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.6.1](https://github.com/k1LoW/tailor-log/compare/v0.6.0...v0.6.1) - 2026-01-26
+### Other Changes
+- chore(deps): bump Songmu/tagpr from 1.10.0 to 1.11.0 in the dependencies group by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/51
+- chore(deps): bump the dependencies group with 3 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/52
+- chore(deps): bump the dependencies group with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/55
+- chore(deps): bump the dependencies group with 3 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/54
+- chore(deps): bump the dependencies group with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/57
+- chore(deps): bump the dependencies group with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/56
+
 ## [v0.6.0](https://github.com/k1LoW/tailor-log/compare/v0.5.2...v0.6.0) - 2026-01-05
 ### New Features 🎉
 - refactor: add RestoreAt and rename From to At by @k1LoW in https://github.com/k1LoW/tailor-log/pull/50
