@@ -1,9 +1,9 @@
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20250717185734-6c6e0d3c608e.1 h1:w2FnA+sUwLAm3VAF2Ed4e0SlTddb28TIKSov6UBCq1c=
 buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20250717185734-6c6e0d3c608e.1/go.mod h1:tvtbpgaVXZX4g6Pn+AnzFycuRK3MOz5HJfEGeEllXYM=
-buf.build/gen/go/tailor-inc/tailor/connectrpc/go v1.19.1-20260122030510-96f58a5b2070.2 h1:hxnyVkpiMQlt6un66zFkNwHxpysnzblEQl12XpmLJ3g=
-buf.build/gen/go/tailor-inc/tailor/connectrpc/go v1.19.1-20260122030510-96f58a5b2070.2/go.mod h1:n/yfP5apiOdXMXt8fafF/P+87f7ALj05W0DXx8M6odU=
-buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go v1.36.11-20260122030510-96f58a5b2070.1 h1:SJcvjohX57B83FFoaMdYjx3LWSwWDkSDN6UE9ootGAw=
-buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go v1.36.11-20260122030510-96f58a5b2070.1/go.mod h1:GL71deI8cQ8FZWLteqqpun9uB7ePxYUE/mTPpFDErx8=
+buf.build/gen/go/tailor-inc/tailor/connectrpc/go v1.19.1-20260127092455-4a84b39fb129.2 h1:qPWdtFnqa2Kyqccus3vfAL4HUGtUI8R7ANIeSGWTt1c=
+buf.build/gen/go/tailor-inc/tailor/connectrpc/go v1.19.1-20260127092455-4a84b39fb129.2/go.mod h1:zbiOwzT0GcBNq+tHaV9jjO5oO2V+Or8JCka3OhzSAnw=
+buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go v1.36.11-20260127092455-4a84b39fb129.1 h1:0PuzIMVpD5J+MKHo9sGYwDGSiZ3CZO/HF7ghJR7zhxg=
+buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go v1.36.11-20260127092455-4a84b39fb129.1/go.mod h1:GL71deI8cQ8FZWLteqqpun9uB7ePxYUE/mTPpFDErx8=
 connectrpc.com/connect v1.19.1 h1:R5M57z05+90EfEvCY1b7hBxDVOUl45PrtXtAV2fOC14=
 connectrpc.com/connect v1.19.1/go.mod h1:tN20fjdGlewnSFeZxLKb0xwIZ6ozc3OQs2hTXy4du9w=
 github.com/Azure/azure-sdk-for-go/sdk/azcore v1.19.1 h1:5YTBM8QDVIBN3sxBil89WfdAAqDZbyJTgh688DSxX5w=
