@@ -22,7 +22,7 @@ const (
 
 	functionPosKey         = "function"
 	functionInputKeyPrefix = "function"
-	maxPageSize            = 1000
+	maxPageSize            = 100
 	sortBy                 = "finished_at"
 )
 

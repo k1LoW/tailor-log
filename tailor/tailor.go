@@ -2,11 +2,13 @@ package tailor
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 	"os"
 
 	"buf.build/gen/go/tailor-inc/tailor/connectrpc/go/tailor/v1/tailorv1connect"
 	"github.com/k1LoW/tailor-log/config"
+	"github.com/k1LoW/tailor-log/version"
 )
 
 type Client struct {
@@ -31,8 +33,9 @@ func New(cfg *config.Config) (*Client, error) {
 	if token := os.Getenv("TAILOR_TOKEN"); token != "" {
 		httpClient = &http.Client{
 			Transport: &bearerTokenTransport{
-				token: token,
-				base:  http.DefaultTransport,
+				token:     token,
+				userAgent: fmt.Sprintf("%s/%s", version.Name, version.Version),
+				base:      http.DefaultTransport,
 			},
 		}
 	}
@@ -45,11 +48,15 @@ func New(cfg *config.Config) (*Client, error) {
 
 // bearerTokenTransport implements http.RoundTripper to add Bearer token to requests.
 type bearerTokenTransport struct {
-	token string
-	base  http.RoundTripper
+	token     string
+	userAgent string
+	base      http.RoundTripper
 }
 
 func (t *bearerTokenTransport) RoundTrip(req *http.Request) (*http.Response, error) {
 	req.Header.Set("Authorization", "Bearer "+t.token)
+	if t.userAgent != "" {
+		req.Header.Set("User-Agent", t.userAgent)
+	}
 	return t.base.RoundTrip(req)
 }
