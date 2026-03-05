@@ -37,14 +37,18 @@ func fetchLatestArtifact(ctx context.Context, owner, repo, name, fp string) ([]b
 		if err != nil {
 			return nil, err
 		}
-		slog.Info("Listed artifacts", "owner", owner, "repo", repo, "artifact_name", name, "artifacts_count", len(l.Artifacts))
+		slog.Info("Listed artifacts", "owner", owner, "repo", repo, "artifact_name", name, "artifacts_count", len(l.Artifacts)) //nolint:gosec // G706: slog structured logging is safe against log injection
 		page += 1
 		for _, a := range l.Artifacts {
 			u, _, err := client.Actions.DownloadArtifact(ctx, owner, repo, a.GetID(), maxRedirect)
 			if err != nil {
 				return nil, err
 			}
-			resp, err := http.Get(u.String())
+			req, err := http.NewRequestWithContext(ctx, http.MethodGet, u.String(), nil)
+			if err != nil {
+				return nil, err
+			}
+			resp, err := http.DefaultClient.Do(req) //nolint:gosec // G704: URL is from trusted GitHub Actions.DownloadArtifact API
 			if err != nil {
 				return nil, err
 			}
