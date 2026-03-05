@@ -1,5 +1,22 @@
 # Changelog
 
+## [v0.6.1](https://github.com/k1LoW/tailor-log/compare/v0.6.0...v0.6.1) - 2026-03-05
+### Other Changes
+- chore(deps): bump Songmu/tagpr from 1.10.0 to 1.11.0 in the dependencies group by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/51
+- chore(deps): bump the dependencies group with 3 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/52
+- chore(deps): bump the dependencies group with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/55
+- chore(deps): bump the dependencies group with 3 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/54
+- chore(deps): bump the dependencies group with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/57
+- chore(deps): bump the dependencies group with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/56
+- chore(deps): bump the dependencies group with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/58
+- chore(deps): bump Songmu/tagpr from 1.12.1 to 1.15.0 in the dependencies group by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/59
+- chore(deps): bump the dependencies group with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/60
+- chore(deps): bump k1LoW/gh-setup from 1.11.6 to 1.11.7 in the dependencies group by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/61
+- chore(deps): bump the dependencies group across 1 directory with 3 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/65
+- chore(deps): bump the dependencies group with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/66
+- chore(deps): bump the dependencies group across 1 directory with 4 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/64
+- chore: add User-Agent header and reduce page size for Tailor API by @dragon3 in https://github.com/k1LoW/tailor-log/pull/67
+
 ## [v0.6.0](https://github.com/k1LoW/tailor-log/compare/v0.5.2...v0.6.0) - 2026-01-05
 ### New Features 🎉
 - refactor: add RestoreAt and rename From to At by @k1LoW in https://github.com/k1LoW/tailor-log/pull/50
