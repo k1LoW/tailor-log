@@ -12,7 +12,7 @@ require (
 	github.com/k1LoW/donegroup v1.10.3
 	github.com/k1LoW/duration v1.2.0
 	github.com/k1LoW/errors v1.2.0
-	github.com/k1LoW/go-github-actions v0.2.0
+	github.com/k1LoW/go-github-actions v0.2.1
 	github.com/k1LoW/go-github-client/v75 v75.0.21
 	github.com/spf13/cobra v1.10.2
 	golang.org/x/sync v0.20.0
@@ -21,9 +21,9 @@ require (
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20250717185734-6c6e0d3c608e.1 // indirect
-	github.com/Azure/azure-sdk-for-go/sdk/azcore v1.19.1 // indirect
+	github.com/Azure/azure-sdk-for-go/sdk/azcore v1.20.0 // indirect
 	github.com/Azure/azure-sdk-for-go/sdk/internal v1.11.2 // indirect
-	github.com/Azure/azure-sdk-for-go/sdk/storage/azblob v1.6.3 // indirect
+	github.com/Azure/azure-sdk-for-go/sdk/storage/azblob v1.6.4 // indirect
 	github.com/DataDog/zstd v1.5.7 // indirect
 	github.com/bradleyfalzon/ghinstallation/v2 v2.17.0 // indirect
 	github.com/cli/go-gh/v2 v2.12.2 // indirect
