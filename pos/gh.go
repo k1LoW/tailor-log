@@ -44,7 +44,7 @@ func fetchLatestArtifact(ctx context.Context, owner, repo, name, fp string) ([]b
 			if err != nil {
 				return nil, err
 			}
-			req, err := http.NewRequestWithContext(ctx, http.MethodGet, u.String(), nil)
+			req, err := http.NewRequestWithContext(ctx, http.MethodGet, u.String(), nil) //nolint:gosec // G704: URL is from trusted GitHub Actions.DownloadArtifact API
 			if err != nil {
 				return nil, err
 			}
