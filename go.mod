@@ -3,8 +3,8 @@ module github.com/k1LoW/tailor-log
 go 1.25.3
 
 require (
-	buf.build/gen/go/tailor-inc/tailor/connectrpc/go v1.20.0-20260520024532-61453b832d9a.1
-	buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go v1.36.11-20260520024532-61453b832d9a.1
+	buf.build/gen/go/tailor-inc/tailor/connectrpc/go v1.20.0-20260527033653-01f32960fef8.1
+	buf.build/gen/go/tailor-inc/tailor/protocolbuffers/go v1.36.11-20260527033653-01f32960fef8.1
 	connectrpc.com/connect v1.20.0
 	github.com/DataDog/datadog-api-client-go/v2 v2.60.0
 	github.com/IGLOU-EU/go-wildcard/v2 v2.1.1
