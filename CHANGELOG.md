@@ -1,5 +1,27 @@
 # Changelog
 
+## [v0.6.2](https://github.com/k1LoW/tailor-log/compare/v0.6.1...v0.6.2) - 2026-07-11
+
+### Other Changes
+- chore(deps): bump google.golang.org/grpc from 1.76.0 to 1.79.3 by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/72
+- chore(deps): bump the dependencies group across 1 directory with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/70
+- chore(deps): bump the dependencies group across 1 directory with 5 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/71
+- chore(deps): bump github.com/k1LoW/go-github-actions from 0.2.0 to 0.2.1 in the dependencies group by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/74
+- chore(deps): bump the dependencies group with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/76
+- chore(deps): bump the dependencies group with 3 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/77
+- chore(deps): bump the dependencies group with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/78
+- chore(deps): bump the dependencies group across 1 directory with 5 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/83
+- chore(deps): bump the dependencies group across 1 directory with 5 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/82
+- chore(deps): bump the dependencies group with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/84
+- chore(deps): bump the dependencies group with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/85
+- chore(deps): bump the dependencies group with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/86
+- chore(deps): bump the dependencies group with 3 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/87
+- chore(deps): bump github.com/DataDog/datadog-api-client-go/v2 from 2.60.0 to 2.61.0 in the dependencies group by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/88
+- chore(deps): bump actions/checkout from 6.0.3 to 7.0.0 in the dependencies group by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/89
+- chore(deps): bump the dependencies group with 2 updates by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/90
+- chore(deps): bump golang.org/x/net from 0.48.0 to 0.55.0 by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/92
+- chore(deps): bump golang.org/x/crypto from 0.51.0 to 0.52.0 by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/95
+
 ## [v0.6.1](https://github.com/k1LoW/tailor-log/compare/v0.6.0...v0.6.1) - 2026-03-05
 ### Other Changes
 - chore(deps): bump Songmu/tagpr from 1.10.0 to 1.11.0 in the dependencies group by @dependabot[bot] in https://github.com/k1LoW/tailor-log/pull/51
