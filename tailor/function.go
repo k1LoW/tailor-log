@@ -85,35 +85,45 @@ func (c *Client) FetchFunctionLogs(ctx context.Context, pos *pos.Pos, out chan<-
 				level = item.LevelError
 			}
 
-			var result any = exec.Result
+			// Fetch individual execution to get logs (List response does not include logs)
+			detail, err := c.client.GetFunctionExecution(ctx, connect.NewRequest(&tailorv1.GetFunctionExecutionRequest{
+				WorkspaceId: c.cfg.WorkspaceID,
+				ExecutionId: exec.Id,
+			}))
+			if err != nil {
+				return err
+			}
+			detailExec := detail.Msg.GetExecution()
+
+			var result any = detailExec.Result
 			var resultJSON map[string]any
 			// construct result as json if string is valid json
-			if len(exec.Result) > 0 && (exec.Result[0] == '{' || exec.Result[0] == '[') {
-				if err := json.Unmarshal([]byte(exec.Result), &resultJSON); err == nil {
+			if len(detailExec.Result) > 0 && (detailExec.Result[0] == '{' || detailExec.Result[0] == '[') {
+				if err := json.Unmarshal([]byte(detailExec.Result), &resultJSON); err == nil {
 					result = resultJSON
 				}
 			}
 
 			attrs := map[string]any{
-				"tailor_platform.workspaceId":          exec.WorkspaceId,
-				"tailor_platform.function.executionId": exec.Id,
-				"tailor_platform.function.scriptName":  exec.ScriptName,
-				"tailor_platform.function.type":        exec.Type.String(),
-				"tailor_platform.function.status":      exec.Status.String(),
-				"tailor_platform.function.logs":        exec.Logs,
-				"tailor_platform.function.startedAt":   exec.StartedAt.AsTime().Format(time.RFC3339Nano),
-				"tailor_platform.function.finishedAt":  exec.FinishedAt.AsTime().Format(time.RFC3339Nano),
+				"tailor_platform.workspaceId":          detailExec.WorkspaceId,
+				"tailor_platform.function.executionId": detailExec.Id,
+				"tailor_platform.function.scriptName":  detailExec.ScriptName,
+				"tailor_platform.function.type":        detailExec.Type.String(),
+				"tailor_platform.function.status":      detailExec.Status.String(),
+				"tailor_platform.function.logs":        detailExec.Logs,
+				"tailor_platform.function.startedAt":   detailExec.StartedAt.AsTime().Format(time.RFC3339Nano),
+				"tailor_platform.function.finishedAt":  detailExec.FinishedAt.AsTime().Format(time.RFC3339Nano),
 				"tailor_platform.function.result":      result,
 			}
 			out <- &item.Item{
 				Source:  source,
-				Time:    exec.FinishedAt.AsTime(),
+				Time:    detailExec.FinishedAt.AsTime(),
 				Level:   level,
-				Message: exec.Result,
+				Message: detailExec.Result,
 				Attrs:   attrs,
 			}
-			if latest.Before(exec.FinishedAt.AsTime()) {
-				latest = exec.FinishedAt.AsTime()
+			if latest.Before(detailExec.FinishedAt.AsTime()) {
+				latest = detailExec.FinishedAt.AsTime()
 			}
 		}
 		nextToken := executions.Msg.GetNextPageToken()
